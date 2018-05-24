@@ -18,7 +18,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 
 
-def plot_predictive_uncertainty(X, true_y, prediction, error):
+def plot_predictive_uncertainty(X, true_y, prediction, error, ax = None):
     """
     plots the prediction and their uncertainty/error/variance using error bars
 
@@ -26,11 +26,14 @@ def plot_predictive_uncertainty(X, true_y, prediction, error):
     :param X:
     :param prediction:
     :param error:
+    :param ax:
     :return:
     """
-    fig = plt.figure()
-    plt.scatter(np.array(X).T[0], true_y, label='true', c='r')
-    plt.errorbar(np.array(X).T[0], prediction, yerr=np.log(error), fmt='o', label='prediction', c='y')
-    plt.legend(loc=0)
+    if ax is None:
+        fig, ax = plt.subplots()
 
-    return fig.axes
+    ax.scatter(np.array(X).T[0], true_y, label='true', c='r')
+    ax.errorbar(np.array(X).T[0], prediction, yerr=np.log(error), fmt='o', label='prediction', c='y')
+    ax.legend(loc=0)
+
+    return ax
