@@ -26,22 +26,24 @@ if __name__ == '__main__':
     n = 500
     d = 5
 
-    # use other scripts
+    # generating data example
     train_X, test_X, train_y, test_y = generate_data(n, d, 0.2)
     train_X, test_X = _adding_intecept(train_X), _adding_intecept(test_X)
 
+    # using model example
     model = Model(n_draws=1000, init_model=None)
     model.fit(train_X, train_y)
-
     pred, err = model.predict(test_X, with_error=True)
-
     pm.traceplot(model.trace)
 
+    # plotting uncertainty plots example
     plot_predictive_uncertainty(test_X, test_y, pred, err)
 
+    # plotting kde for given samples example
     fig, ax = plt.subplots()
     coef = model.trace['w'].T
     for w in coef:
         plot_kde(w, ax=ax)
 
+    # display the plots
     plt.show()
