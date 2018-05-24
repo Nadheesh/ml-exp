@@ -122,11 +122,9 @@ if __name__ == '__main__':
     from matplotlib import pyplot as plt
     pm.traceplot(model.trace)
 
-    fig = plt.figure()
-    plt.scatter(np.array(test_X).T[0], test_y, label = 'true', c = 'r')
-    plt.errorbar(np.array(test_X).T[0], pred, yerr=np.log(err), fmt='o', label='prediction', c = 'y')
-    plt.legend(loc=0)
-    # ax.plot(test_X, pred, label = 'predict')
+    from visualizing.predictive_uncertaity import plot_predictive_uncertainty
+    plot_predictive_uncertainty(test_X, test_y, pred, err)
+
     plt.show()
 
 
