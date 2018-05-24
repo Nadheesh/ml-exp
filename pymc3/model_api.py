@@ -123,8 +123,8 @@ if __name__ == '__main__':
     pm.traceplot(model.trace)
 
     fig = plt.figure()
-    plt.scatter(test_X, test_y, label = 'true')
-    plt.errorbar(np.array(test_X).T[0], pred, yerr=np.log(err), fmt='o', label='prediction')
+    plt.scatter(np.array(test_X).T[0], test_y, label = 'true', c = 'r')
+    plt.errorbar(np.array(test_X).T[0], pred, yerr=np.log(err), fmt='o', label='prediction', c = 'y')
     plt.legend(loc=0)
     # ax.plot(test_X, pred, label = 'predict')
     plt.show()
